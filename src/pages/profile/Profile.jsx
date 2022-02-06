@@ -6,7 +6,8 @@ const db = getFirestore();
 const Profile = () => {
     const [user, loading, error] = useAuthState(getAuth());
     const [totalGood, setTotalGood] = useState(0);
-    const [totalPoints, setTotalPoints] = useState(0);
+    const [total, setTotalPoints] = useState(0);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         if (!loading) {
