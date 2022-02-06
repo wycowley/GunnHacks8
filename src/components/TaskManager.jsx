@@ -8,7 +8,7 @@ const TaskManager = (props) => {
         { description: "Pick up 10 pieces of trash", points: 3 },
         { description: "Call a family member", points: 3 },
         { description: "Give a stranger a compliment", points: 3 },
-        { description: "Leave a nice note on someone's car", points: 3 },
+        { description: "help me im a poor old grandma", points: 3 },
     ]);
     return (
         <div>
