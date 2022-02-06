@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/KarmaKompetition/static/css/main.9a8e1fc7.css",
+    "main.js": "/KarmaKompetition/static/js/main.13b1414f.js",
+    "static/js/787.b907bc70.chunk.js": "/KarmaKompetition/static/js/787.b907bc70.chunk.js",
+    "index.html": "/KarmaKompetition/index.html",
+    "main.9a8e1fc7.css.map": "/KarmaKompetition/static/css/main.9a8e1fc7.css.map",
+    "main.13b1414f.js.map": "/KarmaKompetition/static/js/main.13b1414f.js.map",
+    "787.b907bc70.chunk.js.map": "/KarmaKompetition/static/js/787.b907bc70.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a8e1fc7.css",
+    "static/js/main.13b1414f.js"
+  ]
+}
