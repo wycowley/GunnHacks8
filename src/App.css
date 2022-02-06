@@ -3,6 +3,7 @@
 }
 html {
     --main-gray: #e2e2e2;
+    --outline-box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.25), 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 .App-logo {
     height: 40vmin;
