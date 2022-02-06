@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import SignIn from "./pages/login/SignIn";
-import Group from "./pages/group/Group";
+import Groups from "./pages/group/Groups";
 
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router";
 
@@ -20,6 +20,7 @@ function App() {
             if (!user) {
                 navigate("/signin");
             }
+            // signOut(getAuth());
         }
     }, [loading, user]);
     return (
@@ -27,7 +28,8 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/signin' element={<SignIn />} />
-                <Route path='/group/:id' element={<Group />} />
+                <Route path='/groups' element={<Groups />} />
+                {/* <Route path='/group/:id' element={<Group />} /> */}
             </Routes>
         </div>
     );
