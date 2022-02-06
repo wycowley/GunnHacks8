@@ -34,7 +34,8 @@ function App() {
                 <Route path='/profile' element={<Profile />} />
                 {/* <Route path='/group/:id' element={<Group />} /> */}
             </Routes>
-            <NavBar></NavBar>
+            <div style={{ height: "4rem" }}></div>
+            {user && <NavBar></NavBar>}
         </div>
     );
 }

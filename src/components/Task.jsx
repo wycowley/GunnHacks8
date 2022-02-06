@@ -1,10 +1,30 @@
 import { useEffect, useState, useRef } from "react";
-import { getFirestore, updateDoc, arrayUnion, doc, collection, setDoc, getDoc, addDoc, where, getDocs, query, orderBy, limit, serverTimestamp, increment, writeBatch } from "firebase/firestore";
+import {
+    getFirestore,
+    updateDoc,
+    arrayUnion,
+    doc,
+    collection,
+    setDoc,
+    getDoc,
+    addDoc,
+    where,
+    getDocs,
+    query,
+    orderBy,
+    limit,
+    serverTimestamp,
+    increment,
+    writeBatch,
+} from "firebase/firestore";
 const db = getFirestore();
-const Task = ({ points, description, user, index, onSelected }, ...props) => {
+const Task = ({ points, description, user, index, onSelected, img, keyU }, ...props) => {
     const checkbox = useRef(null);
     const [userQuestionRef, setUserQuestionRef] = useState(null);
     const [alreadyCreatedFirestore, setAlreadyCreatedFirestore] = useState(false);
+
+    const [cbChecked, setCbChecked] = useState(false);
+
     // first it needs to check if it has already been checked
     useEffect(() => {
         if (user) {
@@ -24,6 +44,7 @@ const Task = ({ points, description, user, index, onSelected }, ...props) => {
             console.log(data.data(), data.id);
             setAlreadyCreatedFirestore(true);
             checkbox.current.checked = data.data().completed;
+            setCbChecked(data.data().completed);
             onSelected({ index: index, completed: data.data().completed, justStarted: true });
         });
     };
@@ -34,7 +55,11 @@ const Task = ({ points, description, user, index, onSelected }, ...props) => {
         } else {
             setAlreadyCreatedFirestore(true);
             console.log("hello");
-            const oneMatching = await addDoc(collection(doc(db, "users", user.uid), "tasks"), { description: description, date: getDate(), completed: checkbox.current.checked });
+            const oneMatching = await addDoc(collection(doc(db, "users", user.uid), "tasks"), {
+                description: description,
+                date: getDate(),
+                completed: checkbox.current.checked,
+            });
             setUserQuestionRef(oneMatching);
         }
     };
@@ -50,6 +75,7 @@ const Task = ({ points, description, user, index, onSelected }, ...props) => {
         return month + day;
     };
     const updatePoints = async () => {
+        setCbChecked(checkbox.current.checked);
         const batch = writeBatch(db);
 
         updateMatchingPrompt();
@@ -94,11 +120,21 @@ const Task = ({ points, description, user, index, onSelected }, ...props) => {
 
         await batch.commit();
     };
+
     return (
-        <div>
-            <input type='checkbox' onClick={updatePoints} ref={checkbox}></input>
-            <p>{description}</p>
-            <p>{points} points</p>
+        <div className='neuOut padIn marBot'>
+            <p className='neuIn padIn2 marBot'>{description}</p>
+            <img style={{ width: "100%" }} className='marBot' src={`/images/${img}.svg`}></img>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <p className='neuIn padIn2'>
+                    {points} {points == 1 ? "point" : "points"}
+                </p>
+                <div style={{ flex: 1 }}></div>
+                <input id={`check${keyU}`} style={{ display: "none" }} className='neuOut padIn2' type='checkbox' onClick={updatePoints} ref={checkbox}></input>
+                <label for={`check${keyU}`} className={`padIn2 ${checkbox?.current?.checked ? "neuIn" : "neuOut"}`}>
+                    <strong>✓</strong>
+                </label>
+            </div>
         </div>
     );
 };

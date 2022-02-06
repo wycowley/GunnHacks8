@@ -40,17 +40,21 @@ const Leaderboard = (props) => {
         }, 1000);
     };
     return (
-        <div>
-            <h1>{name}</h1>
+        <div className='neuOut padIn  marBot'>
+            <h1 className='neuIn padIn2 marBot' style={{ textAlign: "center" }}>
+                {name}
+            </h1>
             {points.map((data, index) => {
                 return (
-                    <div key={index}>
+                    <div className='neuOut padIn2  marBot' style={{ display: "flex", justifyContent: "center", alignItems: "center" }} key={index}>
                         {/* number of points user has */}
                         <h1>{data?.points}</h1>
                         {/* display name of user */}
-                        <h1>{data?.name}</h1>
+                        <div style={{ flex: 1, textAlign: "center" }}>
+                            <h1 style={{ fontSize: "1rem" }}>{data?.name}</h1>
+                        </div>
                         {/* profile img */}
-                        <img src={data?.profileImg}></img>
+                        <img style={{ height: "2rem" }} src={data?.profileImg}></img>
                     </div>
                 );
             })}

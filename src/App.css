@@ -1,41 +1,93 @@
-.App {
-    text-align: center;
-}
-html {
-    --main-gray: #e2e2e2;
-    --outline-box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.25), 5px 5px 5px rgba(0, 0, 0, 0.1);
-}
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+:root {
+    --background: #e2e2e2;
+    --text: #2f2f2f;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.neuOut {
+    border-radius: 1rem;
+    background: var(--background);
+    box-shadow: 0.35rem 0.35rem 0.35rem #0000001a, -0.35rem -0.35rem 0.35rem #ffffff40;
 }
 
-.App-link {
-    color: #61dafb;
+label {
+    transition: box-shadow 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* transition: box-shadow 0.3s ease; */
+.neuIn {
+    border-radius: 1rem;
+    background: var(--background);
+    box-shadow: inset 0.35rem 0.35rem 0.35rem #0000001a, inset -0.35rem -0.35rem 0.35rem #ffffffa0;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.padIn {
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+.padIn2 {
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.marBot {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+button {
+    font-size: 1.5rem;
+    border: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-weight: 800;
+    border-radius: 1rem;
+    background: var(--background);
+    box-shadow: 0.35rem 0.35rem 0.35rem #0000001a, -0.35rem -0.35rem 0.35rem #ffffff40;
+}
+input {
+    font-size: 1rem;
+    border: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    /* font-weight: 800; */
+}
+
+input[type="submit"] {
+    font-size: 1.5rem;
+    border: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-weight: 800;
+}
+
+button:active {
+    border-radius: 1rem;
+    background: var(--background);
+    box-shadow: inset 0.35rem 0.35rem 0.35rem #0000001a, inset -0.35rem -0.35rem 0.35rem #ffffffa0;
+}
+
+.wideButton {
+    width: 100%;
+}
+
+.medal {
+    display: inline-block;
+    /* margin-right: 1rem; */
+    margin-bottom: 2rem;
 }

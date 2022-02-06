@@ -6,12 +6,23 @@ import CreateGroup from "./CreateGroup";
 import JoinGroup from "./JoinGroup";
 import TaskManager from "../../components/TaskManager";
 import { Link } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
+import { useNavigate } from "react-router";
 const db = getFirestore();
 const Home = () => {
     const [user, loading, error] = useAuthState(getAuth());
     const [groups, setGroups] = useState([]);
-    const [showCreateGroup, setShowCreateGroup] = useState(false);
-    const [showJoinGroup, setShowJoinGroup] = useState(false);
+    const navigate = useNavigate();
+    const handlers = useSwipeable({
+        onSwipedLeft: function () {
+            console.log("hi");
+            navigate("/profile");
+        },
+        onSwipedRight: function () {
+            console.log("hi");
+            navigate("/groups");
+        },
+    });
 
     useEffect(() => {
         if (!loading) {
@@ -21,24 +32,10 @@ const Home = () => {
     }, [user, loading]);
 
     return (
-        <div>
+        <div className='padIn' {...handlers}>
             {/* Contains all of the tasks */}
             <TaskManager user={user}></TaskManager>
             {/* All just logic to display and remove the create and join group UI */}
-            <button
-                onClick={() => {
-                    setShowCreateGroup(!showCreateGroup);
-                }}>
-                Create Group
-            </button>
-            <button
-                onClick={() => {
-                    setShowJoinGroup(!showJoinGroup);
-                }}>
-                Join Group
-            </button>
-            {showCreateGroup ? <CreateGroup setShowCreateGroup={setShowCreateGroup} user={user} /> : <></>}
-            {showJoinGroup ? <JoinGroup setShowJoinGroup={setShowJoinGroup} user={user} /> : <></>}
         </div>
     );
 };

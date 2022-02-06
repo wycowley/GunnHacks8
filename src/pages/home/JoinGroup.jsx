@@ -20,7 +20,11 @@ const JoinGroup = (props) => {
         const groupDocument = await getDoc(groupRef);
         if (groupDocument.exists()) {
             const userDocument = await updateDoc(userRef, { groups: arrayUnion({ id: id, name: groupDocument.data().name }) });
-            await setDoc(doc(collection(groupRef, "points"), props.user.uid), { total: 0, displayName: props.user.displayName, profileImg: props.user.photoURL });
+            await setDoc(doc(collection(groupRef, "points"), props.user.uid), {
+                total: 0,
+                displayName: props.user.displayName,
+                profileImg: props.user.photoURL,
+            });
         } else {
             window.alert("Group does not exist");
         }
@@ -30,16 +34,14 @@ const JoinGroup = (props) => {
     };
 
     return (
-        <div>
-            <h1>Join Group</h1>
-            <p>Group ID</p>
+        <div className='neuOut padIn marBot'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
 
                 {/* include validation with required or other standard HTML validation rules */}
-                <input {...register("id", { required: true })} />
+                <input className='neuIn padIn2 wideButton marBot' placeholder='Group ID...' {...register("id", { required: true })} />
 
-                <input type='submit' />
+                <input className='neuOut padIn2 wideButton' type='submit' value={"Join Group"} />
             </form>
         </div>
     );

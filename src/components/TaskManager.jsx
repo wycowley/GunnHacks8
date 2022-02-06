@@ -2,7 +2,24 @@ import Task from "./Task";
 import { useState } from "react";
 import { useEffect } from "react";
 import data from "../tasklist.json";
-import { getFirestore, updateDoc, arrayUnion, doc, collection, setDoc, getDoc, addDoc, where, getDocs, query, orderBy, limit, serverTimestamp, increment, writeBatch } from "firebase/firestore";
+import {
+    getFirestore,
+    updateDoc,
+    arrayUnion,
+    doc,
+    collection,
+    setDoc,
+    getDoc,
+    addDoc,
+    where,
+    getDocs,
+    query,
+    orderBy,
+    limit,
+    serverTimestamp,
+    increment,
+    writeBatch,
+} from "firebase/firestore";
 
 const db = getFirestore();
 const TaskManager = (props) => {
@@ -88,11 +105,33 @@ const TaskManager = (props) => {
         }
     };
     return (
-        <div>
-            <h1>Tasks for today:</h1>
-            {goldMedal ? <h2>Gold Medal Achieved!</h2> : silverMedal ? <h2>Silver Medal Achieved!</h2> : <></>}
+        <div className=''>
+            {/* <h1 className='marBot'>Tasks for today:</h1> */}
+            {goldMedal && (
+                <div className='neuOut padIn2 marBot'>
+                    <h2 style={{ textAlign: "center" }}>🥇 achieved today!</h2>
+                </div>
+            )}
+            {silverMedal && (
+                <div className='neuOut padIn2 marBot'>
+                    <h2 style={{ textAlign: "center" }}>🥈 achieved today!</h2>{" "}
+                </div>
+            )}
             {tasks.map((task, index) => {
-                return <Task key={index} points={task.points} index={index} description={task.description} user={props.user} onSelected={keepTrack} />;
+                console.log(task);
+                console.log(task.img);
+                return (
+                    <Task
+                        key={index}
+                        keyU={index}
+                        points={task.points}
+                        index={index}
+                        description={task.description}
+                        img={task.img}
+                        user={props.user}
+                        onSelected={keepTrack}
+                    />
+                );
             })}
         </div>
     );

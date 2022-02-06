@@ -6,7 +6,7 @@ import "./SignIn.css";
 import GoogleButton from "react-google-button";
 
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
+export const auth = getAuth();
 const db = getFirestore();
 const SignIn = (props) => {
     const [redirect, changeRedirect] = useState(false);
@@ -31,8 +31,19 @@ const SignIn = (props) => {
         const userRef = doc(db, "users", user.uid);
         const document = await getDoc(userRef);
         if (document.exists()) {
+            navigate("/");
         } else {
-            await setDoc(userRef, { displayName: user.displayName, groups: [], email: user.email, profileImg: user.photoURL, dailyPoints: {}, totalPoints: 0, totalGood: 0, goldMedals: 0, silverMedals: 0 });
+            await setDoc(userRef, {
+                displayName: user.displayName,
+                groups: [],
+                email: user.email,
+                profileImg: user.photoURL,
+                dailyPoints: {},
+                totalPoints: 0,
+                totalGood: 0,
+                goldMedals: 0,
+                silverMedals: 0,
+            });
             navigate("/");
         }
     };
