@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { getFirestore, updateDoc, arrayUnion, doc, collection, setDoc, getDoc, addDoc, where, getDocs, query, orderBy, limit, serverTimestamp, increment } from "firebase/firestore";
+import { getFirestore, updateDoc, arrayUnion, doc, collection, setDoc, getDoc, addDoc, where, getDocs, query, orderBy, limit, serverTimestamp, increment, writeBatch } from "firebase/firestore";
 const db = getFirestore();
 const Task = ({ points, description, user }, ...props) => {
     const checkbox = useRef(null);
@@ -48,6 +48,8 @@ const Task = ({ points, description, user }, ...props) => {
         return month + day;
     };
     const updatePoints = async () => {
+        const batch = writeBatch(db);
+
         updateMatchingPrompt();
         const userRef = doc(db, "users", user.uid);
         const userDocument = await getDoc(userRef);
@@ -60,8 +62,33 @@ const Task = ({ points, description, user }, ...props) => {
         for (let i = 0; i < userDocument.data().groups.length; i++) {
             let idOfGroup = userDocument.data().groups[i].id;
             const userDocumentInGroup = doc(doc(db, "groups", idOfGroup), "points", user.uid);
-            const updatePointValue = await updateDoc(userDocumentInGroup, { total: increment(change) });
+            batch.update(userDocumentInGroup, { total: increment(change) });
         }
+        // update total points, total transactions, and daily points
+
+        if (userDocument.data().dailyPoints[getDate()] === undefined) {
+            let dailyPoints = userDocument.data().dailyPoints;
+            let totalPoints = userDocument.data().totalPoints + change;
+            let totalGood = userDocument.data().totalGood + 1;
+
+            if (checkbox.current.checked === false) {
+                totalGood -= 2;
+            }
+
+            dailyPoints[getDate()] = change;
+            batch.update(userRef, { dailyPoints: dailyPoints, totalPoints: totalPoints, totalGood: totalGood });
+        } else {
+            let dailyPoints = userDocument.data().dailyPoints;
+            let totalPoints = userDocument.data().totalPoints + change;
+            let totalGood = userDocument.data().totalGood + 1;
+
+            if (checkbox.current.checked === false) {
+                totalGood -= 2;
+            }
+            dailyPoints[getDate()] = dailyPoints[getDate()] + change;
+            batch.update(userRef, { dailyPoints: dailyPoints, totalPoints: totalPoints, totalGood: totalGood });
+        }
+        await batch.commit();
     };
     return (
         <div>

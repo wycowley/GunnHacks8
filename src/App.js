@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import SignIn from "./pages/login/SignIn";
 import Groups from "./pages/group/Groups";
+import Profile from "./pages/profile/Profile";
 
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/signin' element={<SignIn />} />
                 <Route path='/groups' element={<Groups />} />
+                <Route path='/profile' element={<Profile />} />
                 {/* <Route path='/group/:id' element={<Group />} /> */}
             </Routes>
         </div>

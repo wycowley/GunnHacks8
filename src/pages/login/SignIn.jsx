@@ -32,7 +32,7 @@ const SignIn = (props) => {
         const document = await getDoc(userRef);
         if (document.exists()) {
         } else {
-            await setDoc(userRef, { displayName: user.displayName, groups: [], email: user.email, profileImg: user.photoURL });
+            await setDoc(userRef, { displayName: user.displayName, groups: [], email: user.email, profileImg: user.photoURL, dailyPoints: {}, totalPoints: 0, totalGood: 0 });
             navigate("/");
         }
     };
