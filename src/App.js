@@ -11,6 +11,7 @@ import Profile from "./pages/profile/Profile";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router";
+import NavBar from "./components/NavBar";
 
 const auth = getAuth();
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path='/profile' element={<Profile />} />
                 {/* <Route path='/group/:id' element={<Group />} /> */}
             </Routes>
+            <NavBar></NavBar>
         </div>
     );
 }

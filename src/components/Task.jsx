@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { getFirestore, updateDoc, arrayUnion, doc, collection, setDoc, getDoc, addDoc, where, getDocs, query, orderBy, limit, serverTimestamp, increment, writeBatch } from "firebase/firestore";
 const db = getFirestore();
-const Task = ({ points, description, user }, ...props) => {
+const Task = ({ points, description, user, index, onSelected }, ...props) => {
     const checkbox = useRef(null);
     const [userQuestionRef, setUserQuestionRef] = useState(null);
     const [alreadyCreatedFirestore, setAlreadyCreatedFirestore] = useState(false);
     // first it needs to check if it has already been checked
     useEffect(() => {
         if (user) {
+            console.log(index);
             getMatchingPrompt();
         }
     }, [user]);
@@ -23,6 +24,7 @@ const Task = ({ points, description, user }, ...props) => {
             console.log(data.data(), data.id);
             setAlreadyCreatedFirestore(true);
             checkbox.current.checked = data.data().completed;
+            onSelected({ index: index, completed: data.data().completed, justStarted: true });
         });
     };
     const updateMatchingPrompt = async () => {
@@ -88,6 +90,8 @@ const Task = ({ points, description, user }, ...props) => {
             dailyPoints[getDate()] = dailyPoints[getDate()] + change;
             batch.update(userRef, { dailyPoints: dailyPoints, totalPoints: totalPoints, totalGood: totalGood });
         }
+        onSelected({ index: index, completed: checkbox.current.checked, justStarted: false });
+
         await batch.commit();
     };
     return (
