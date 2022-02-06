@@ -8,6 +8,7 @@ const db = getFirestore();
 
 const Groups = () => {
     const [user, loading, error] = useAuthState(getAuth());
+    const [loadingGroups, setLoadingGroups] = useState(true);
     const [leaderboardIds, setLeaderboardIds] = useState([]);
     useEffect(() => {
         if (!loading) {
@@ -21,11 +22,11 @@ const Groups = () => {
         const userRef = doc(db, "users", user.uid);
         const document = await getDoc(userRef);
         setLeaderboardIds(document.data().groups);
-        console.log(document.data().groups);
     };
 
     return (
         <div>
+            {leaderboardIds.length == 0 && !loadingGroups ? <h1>You don't have Groups yet!</h1> : <></>}
             {leaderboardIds.map((data, index) => {
                 // renders each of the leaderboards for each group that you are in
                 return <Leaderboard key={data.id} id={data.id} />;

@@ -5,6 +5,7 @@
     background-color: var(--main-gray);
     position: fixed;
     bottom: 0%;
+    padding: 1rem 0;
 }
 
 .navbar > div {
@@ -15,7 +16,15 @@
     width: 90%;
     background-color: var(--main-gray);
     box-shadow: var(--outline-box-shadow);
-    padding: 1rem;
+    /* padding: 2rem; */
+    margin-left: 5%;
+    border-radius: 1rem;
 }
 .navbar > div > div {
+    padding: 1rem;
+}
+
+.currentLoc {
+    box-shadow: var(--outline-box-shadow);
+    border-radius: 50%;
 }

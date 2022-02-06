@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const NavBar = () => {
     let location = useLocation();
     const [active, setActive] = useState(location.pathname);
+
     useEffect(() => {
         if (location.pathname === "/") {
             setActive("home");
@@ -14,17 +15,16 @@ const NavBar = () => {
             setActive("profile");
         }
     }, [location]);
-    console.log(location.pathname);
     return (
         <div className='navbar'>
             <div>
-                <div>
+                <div className={active == "groups" ? "currentLoc" : ""}>
                     <Link to='/groups'>Groups</Link>
                 </div>
-                <div className='home-container'>
+                <div className={active == "home" ? "currentLoc" : ""}>
                     <Link to='/'>Home</Link>
                 </div>
-                <div>
+                <div className={active == "profile" ? "currentLoc" : ""}>
                     <Link to='/profile'>Profile</Link>
                 </div>
             </div>

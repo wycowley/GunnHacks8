@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 const db = getFirestore();
 const Leaderboard = (props) => {
     const [user, loading, error] = useAuthState(getAuth());
-    const [points, setPoints] = useState([{ name: "", points: 0 }]);
+    const [points, setPoints] = useState([{}]);
     const [name, setName] = useState("");
     const inviteButton = useRef(null);
     useEffect(() => {
@@ -46,11 +46,11 @@ const Leaderboard = (props) => {
                 return (
                     <div key={index}>
                         {/* number of points user has */}
-                        <h1>{data.points}</h1>
+                        <h1>{data?.points}</h1>
                         {/* display name of user */}
-                        <h1>{data.name}</h1>
+                        <h1>{data?.name}</h1>
                         {/* profile img */}
-                        <img src={data.profileImg}></img>
+                        <img src={data?.profileImg}></img>
                     </div>
                 );
             })}

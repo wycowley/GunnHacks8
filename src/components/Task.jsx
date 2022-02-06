@@ -11,7 +11,7 @@ const Task = ({ points, description, user, index, onSelected }, ...props) => {
             console.log(index);
             getMatchingPrompt();
         }
-    }, [user]);
+    }, [user, points, description]);
     const getMatchingPrompt = async () => {
         // needs to match the same date, and the same description
         const userTasks = collection(doc(db, "users", user.uid), "tasks");
