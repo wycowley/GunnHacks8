@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import app from "./firebase.js";
 
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
+import SignIn from "./pages/login/SignIn";
+import Group from "./pages/group/Group";
+
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router";
+
+const auth = getAuth();
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [user, loading] = useAuthState(auth);
+    let navigate = useNavigate();
+    useEffect(() => {
+        if (!loading) {
+            if (!user) {
+                navigate("/signin");
+            }
+        }
+    }, [loading, user]);
+    return (
+        <div>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/signin' element={<SignIn />} />
+                <Route path='/group/:id' element={<Group />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

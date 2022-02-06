@@ -1,0 +1,12 @@
+.other-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.google-button {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 0.25rem !important;
+    font-weight: bold !important;
+}
