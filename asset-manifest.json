@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/KarmaKompetition/static/css/main.9a8e1fc7.css",
-    "main.js": "/KarmaKompetition/static/js/main.13b1414f.js",
-    "static/js/787.b907bc70.chunk.js": "/KarmaKompetition/static/js/787.b907bc70.chunk.js",
-    "index.html": "/KarmaKompetition/index.html",
-    "main.9a8e1fc7.css.map": "/KarmaKompetition/static/css/main.9a8e1fc7.css.map",
-    "main.13b1414f.js.map": "/KarmaKompetition/static/js/main.13b1414f.js.map",
-    "787.b907bc70.chunk.js.map": "/KarmaKompetition/static/js/787.b907bc70.chunk.js.map"
+    "main.css": "/GunnHacks8/static/css/main.9a8e1fc7.css",
+    "main.js": "/GunnHacks8/static/js/main.0498d883.js",
+    "static/js/787.b907bc70.chunk.js": "/GunnHacks8/static/js/787.b907bc70.chunk.js",
+    "index.html": "/GunnHacks8/index.html",
+    "main.9a8e1fc7.css.map": "/GunnHacks8/static/css/main.9a8e1fc7.css.map",
+    "main.0498d883.js.map": "/GunnHacks8/static/js/main.0498d883.js.map",
+    "787.b907bc70.chunk.js.map": "/GunnHacks8/static/js/787.b907bc70.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a8e1fc7.css",
-    "static/js/main.13b1414f.js"
+    "static/js/main.0498d883.js"
   ]
 }
