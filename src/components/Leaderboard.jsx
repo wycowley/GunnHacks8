@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router";
-import { getFirestore, doc, collection, setDoc, getDoc, getDocs, orderBy } from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState, useRef } from "react";
 const db = getFirestore();
 const Leaderboard = (props) => {
@@ -19,9 +19,9 @@ const Leaderboard = (props) => {
     // loads in all of the points that have been recorded already
     const loadInPoints = async () => {
         const groupRef = doc(db, "groups", props.id);
-        const pointsRef = collection(groupRef, "points");
+        const pointsRef = query(collection(groupRef, "points"), orderBy("total", "desc"));
 
-        const querySnapshot = await getDocs(pointsRef, orderBy("total", "desc"));
+        const querySnapshot = await getDocs(pointsRef);
         const basicData = await getDoc(groupRef);
         setName(basicData.data().name);
 
@@ -54,7 +54,7 @@ const Leaderboard = (props) => {
                             <h1 style={{ fontSize: "1rem" }}>{data?.name}</h1>
                         </div>
                         {/* profile img */}
-                        <img style={{ height: "2rem" }} src={data?.profileImg}></img>
+                        <img style={{ height: "2rem", borderRadius: "50%" }} src={data?.profileImg}></img>
                     </div>
                 );
             })}

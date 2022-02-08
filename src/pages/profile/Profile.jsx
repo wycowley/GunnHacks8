@@ -61,7 +61,7 @@ const Profile = () => {
         <div className='padIn' {...handlers}>
             <div className='marBot' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <div className='neuOut padIn2' style={{ borderRadius: "100%", width: "10rem" }}>
-                    <img style={{ height: "8rem" }} src={userData?.profileImg}></img>
+                    <img style={{ height: "8rem", borderRadius: "50%" }} src={userData?.profileImg}></img>
                 </div>
             </div>
             <h1 className='marBot' style={{ textAlign: "center" }}>
